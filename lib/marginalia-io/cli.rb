@@ -96,6 +96,21 @@ updated: #{note['updated_at']}
     api.append(id, body)
   end
 
+  desc "create TITLE", "Create a note with the given title"
+  def create(*args)
+    title = args.join(" ")
+    temp = Tempfile.new(['journal', '.md'])
+    system(ENV['EDITOR'], temp.path)
+    body = temp.read
+    if body.strip == ""
+      exit 0
+    end
+
+    resp = api.create(title, body).parsed_response
+    puts "Created note #{resp['id']}"
+
+  end
+
   default_task :list
 
   no_tasks do

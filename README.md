@@ -23,6 +23,7 @@ Or install it yourself as:
 ```
 Tasks:
   marginalia append ID     # Append to the given note
+  marginalia create TITLE  # Create a ntew note with the given title
   marginalia edit ID       # Edit the given note in the editor
   marginalia help [TASK]   # Describe available tasks or one specific task
   marginalia list          # List all notes
@@ -50,6 +51,9 @@ note_5 = api.get(5)              # Get the note with id 5
 api.append(5, "Hi There")        # Append "Hi There" with a timestamp to the end of not 5
 
 api.update(5, "Hello There")     # replace the body of note 5 with "Hello There"
+
+api.create("Title", "Body")      # create a note with the given title and body
+
 ```
 
 

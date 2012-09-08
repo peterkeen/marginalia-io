@@ -22,6 +22,10 @@ module Marginalia
         self.class.post("/notes/#{id}/append.json", :body => {:body => body})
       end
 
+      def create(title, body)
+        self.class.post("/notes.json", :body => {:note => {:body => body, :title => title}})
+      end
+
       def all
         self.class.get("/notes.json").parsed_response
       end
