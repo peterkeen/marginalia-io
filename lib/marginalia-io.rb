@@ -1,0 +1,5 @@
+require 'marginalia-io/version'
+require 'marginalia-io/auth'
+require 'marginalia-io/api'
+require 'marginalia-io/cli'
+require 'marginalia-io/version'
