@@ -1,5 +1,6 @@
 require 'thor'
 require 'open3'
+require 'json'
 
 class Marginalia::IO::CLI < Thor
   include Thor::Actions
@@ -93,6 +94,27 @@ updated: #{note['updated_at']}
       exit 0
     end
 
+    api.append(id, body)
+  end
+
+  desc "dataappend ID KEY=VALUE ...", "Append a data block to the given note"
+  def dataappend(*args)
+    id = args.shift
+    raise Thor::Error.new "Expected an id" unless id
+
+    raise Thor::Error.new "Expected at least one key=value pair" unless args.length > 0
+
+    data = {}
+    args.each do |arg|
+      key, value = arg.split('=')
+      data[key] = value
+    end
+
+    body = <<HERE
+```data
+#{JSON.dump(data)}
+```
+HERE
     api.append(id, body)
   end
 
